@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricHub.Infrastructure", "src\MetricHub.Infrastructure\MetricHub.Infrastructure.csproj", "{F27CFC81-8923-421D-AE07-298270F65FF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricHub.Entrypoint", "src\MetricHub.Entrypoint\MetricHub.Entrypoint.csproj", "{C700C278-1DAC-4BDD-A8D9-9F5246983D9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MetricProvider", "MetricProvider", "{A18E5699-1B55-480A-A18E-62AA73462323}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MetricLogger", "MetricLogger", "{DBD7324A-FBDA-477F-9E9F-9BAE01C27D2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricHub.ConsoleMetricLogger", "src\MetricLogger\MetricHub.ConsoleMetricLogger\MetricHub.ConsoleMetricLogger.csproj", "{35EACDA7-0850-47DD-B381-AAD73065AB88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricHub.FileMetricLogger", "src\MetricLogger\MetricHub.FileMetricLogger\MetricHub.FileMetricLogger.csproj", "{1BD60632-6604-4662-8331-882B55322AF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricHub.EtwMetricProvider", "src\MetricProvider\MetricHub.EtwMetricProvider\MetricHub.EtwMetricProvider.csproj", "{0CBB0DD2-1784-4770-8B0F-E4EBF089AB79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricHub.PerfCounterMetricProvider", "src\MetricProvider\MetricHub.PerfCounterMetricProvider\MetricHub.PerfCounterMetricProvider.csproj", "{6F0960B4-E7CB-4251-9C69-9634299FA04A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F27CFC81-8923-421D-AE07-298270F65FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F27CFC81-8923-421D-AE07-298270F65FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F27CFC81-8923-421D-AE07-298270F65FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F27CFC81-8923-421D-AE07-298270F65FF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C700C278-1DAC-4BDD-A8D9-9F5246983D9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C700C278-1DAC-4BDD-A8D9-9F5246983D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C700C278-1DAC-4BDD-A8D9-9F5246983D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C700C278-1DAC-4BDD-A8D9-9F5246983D9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35EACDA7-0850-47DD-B381-AAD73065AB88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35EACDA7-0850-47DD-B381-AAD73065AB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35EACDA7-0850-47DD-B381-AAD73065AB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35EACDA7-0850-47DD-B381-AAD73065AB88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BD60632-6604-4662-8331-882B55322AF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BD60632-6604-4662-8331-882B55322AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BD60632-6604-4662-8331-882B55322AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BD60632-6604-4662-8331-882B55322AF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CBB0DD2-1784-4770-8B0F-E4EBF089AB79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CBB0DD2-1784-4770-8B0F-E4EBF089AB79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CBB0DD2-1784-4770-8B0F-E4EBF089AB79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CBB0DD2-1784-4770-8B0F-E4EBF089AB79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F0960B4-E7CB-4251-9C69-9634299FA04A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F0960B4-E7CB-4251-9C69-9634299FA04A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F0960B4-E7CB-4251-9C69-9634299FA04A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F0960B4-E7CB-4251-9C69-9634299FA04A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{35EACDA7-0850-47DD-B381-AAD73065AB88} = {DBD7324A-FBDA-477F-9E9F-9BAE01C27D2F}
+		{1BD60632-6604-4662-8331-882B55322AF1} = {DBD7324A-FBDA-477F-9E9F-9BAE01C27D2F}
+		{0CBB0DD2-1784-4770-8B0F-E4EBF089AB79} = {A18E5699-1B55-480A-A18E-62AA73462323}
+		{6F0960B4-E7CB-4251-9C69-9634299FA04A} = {A18E5699-1B55-480A-A18E-62AA73462323}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80059396-532C-4E97-B580-B22FC031935B}
+	EndGlobalSection
+EndGlobal
