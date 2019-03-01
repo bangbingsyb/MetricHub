@@ -21,10 +21,9 @@ namespace MetricHub.MetricProvider
             PerformanceCounter perfCounter = new PerformanceCounter(categoryName, counterName, instanceName);
             while (true)
             {
-                OnPublishMetric(prefix + perfCounter.NextValue().ToString());
                 Thread.Sleep(1000);
+                OnPublishMetric(prefix + perfCounter.NextValue().ToString());
             }
-
         }
     }
 }
