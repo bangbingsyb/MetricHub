@@ -1,20 +1,18 @@
 ﻿using MetricHub.Infrastructure;
 using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Session;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace MetricHub.MetricProvider
 {
     public class EtwMetricProvider : MetricProviderBase
     {
-        private EtwMonitorOptions _options = new EtwMonitorOptions()
-        {
-            SessionName = nameof(EtwMetricProvider),
-            ProviderGuid = new Guid("3A2A4E84-4C21-4981-AE10-3FDA0D9B0F83"),
-            ProviderName = "IIS: WWW Server",
-            Flags = 0xFFFFFFFE,
-            Level = TraceEventLevel.Verbose
-        };
+        private string _sessionName;
+
+        private List<EtwProviderDefinition> _etwProviderList = new List<EtwProviderDefinition>();
 
         public override void Start()
         {
@@ -24,14 +22,56 @@ namespace MetricHub.MetricProvider
                 return;
             }
 
+            Console.WriteLine($"Starting {nameof(EtwMetricProvider)} ...");
+
+            Initialize();
+
             // Create a TraceEventSession
-            using (var session = new TraceEventSession(_options.SessionName))
+            using (var session = new TraceEventSession(_sessionName))
             {
+                Console.WriteLine($"Created the ETW session {_sessionName}.");
+
                 // Hook up a callback for every event the Dynamic parser knows about.
                 session.Source.Dynamic.All += ParseEvent;
 
-                var restarted = session.EnableProvider(_options.ProviderGuid, _options.Level, _options.Flags);
+                foreach (var provider in _etwProviderList)
+                {
+                    if (string.IsNullOrEmpty(provider.ProviderGuid.ToString()))
+                    {
+                        if (string.IsNullOrEmpty(provider.ProviderName))
+                        {
+                            throw new ArgumentException();
+                        }
+                        var restarted = session.EnableProvider(provider.ProviderName, provider.Level, provider.Flags);
+                    }
+                    else
+                    {
+                        var restarted = session.EnableProvider(new Guid(provider.ProviderGuid), provider.Level, provider.Flags);
+                    }
+                }
+
                 session.Source.Process();
+            }
+        }
+
+        private void Initialize()
+        {
+            if (string.IsNullOrEmpty(_sessionName))
+            {
+                _sessionName = nameof(EtwMetricProvider) + "-" + Guid.NewGuid().ToString();
+            }
+
+            string configFilePath = Utils.GetAssemblyDirectory() + Path.DirectorySeparatorChar + this.GetType().Name + ".json";
+            string json = File.ReadAllText(configFilePath);
+
+            _etwProviderList = JsonConvert.DeserializeObject<List<EtwProviderDefinition>>(json);
+
+            foreach (var provider in _etwProviderList)
+            {
+                Console.WriteLine($"ProviderName: {provider.ProviderName}, " +
+                                  $"ProviderGuid: {provider.ProviderGuid}, " +
+                                  $"Flags: {provider.Flags.ToString()}, " +
+                                  $"Level: {provider.Level.ToString()}");
             }
         }
 

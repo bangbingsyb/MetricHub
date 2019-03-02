@@ -1,28 +1,44 @@
 ﻿using MetricHub.Infrastructure;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace MetricHub.MetricProvider
 {
     public class PerfCounterMetricProvider : MetricProviderBase
     {
+        private List<PerformanceCounter> _perfCounterList = new List<PerformanceCounter>();
+
         public override void Start()
         {
-            string categoryName = "Process";
-            string counterName = "% Processor Time";
-            string instanceName = "_Total";
-            string prefix = $"{categoryName}\\{counterName}\\{instanceName}: ";
+            Initialize();
 
-            PerformanceCounter perfCounter = new PerformanceCounter(categoryName, counterName, instanceName);
             while (true)
             {
                 Thread.Sleep(1000);
-                OnPublishMetric(prefix + perfCounter.NextValue().ToString());
+                foreach (var perfCounter in _perfCounterList)
+                {
+                    string data = $"{perfCounter.CategoryName}\\{perfCounter.CounterName}\\{perfCounter.InstanceName}: {perfCounter.NextValue().ToString()}";
+
+                    OnPublishMetric(data);
+                }
+            }
+        }
+
+        private void Initialize()
+        {
+            string configFilePath = Utils.GetAssemblyDirectory() + Path.DirectorySeparatorChar + this.GetType().Name + ".json";
+            string json = File.ReadAllText(configFilePath);
+
+            List<PerfCounterDefinition> perfCounterDefinitions = JsonConvert.DeserializeObject<List<PerfCounterDefinition>>(json);
+
+            foreach (var def in perfCounterDefinitions)
+            {
+                Console.WriteLine($"Initializing performance counter: {def.CategoryName}\\{def.CounterName}\\{def.InstanceName}");
+                _perfCounterList.Add(new PerformanceCounter(def.CategoryName, def.CounterName, def.InstanceName));
             }
         }
     }

@@ -19,14 +19,14 @@ namespace MetricHub.Entrypoint
             IMetricLogger consoleLogger = new ConsoleMetricLogger();
             IMetricLogger fileLogger = new FileMetricLogger();
 
-            //IMetricProvider etwProvider = new EtwMetricProvider();
-            IMetricProvider perfCounterProvider = new PerfCounterMetricProvider();
+            //IMetricProvider perfCounterProvider = new PerfCounterMetricProvider();
+            //perfCounterProvider.Subscribe(fileLogger);
+            //perfCounterProvider.Subscribe(consoleLogger);
+            //Task.Factory.StartNew(() => { perfCounterProvider.Start(); });
 
-            perfCounterProvider.Subscribe(fileLogger);
-            perfCounterProvider.Subscribe(consoleLogger);
-
-            Task.Factory.StartNew(() => { perfCounterProvider.Start(); });
-            //Task.Factory.StartNew(() => { etwProvider.Start(); });
+            IMetricProvider etwProvider = new EtwMetricProvider();
+            etwProvider.Subscribe(consoleLogger);
+            Task.Factory.StartNew(() => { etwProvider.Start(); });
         }
     }
 }
