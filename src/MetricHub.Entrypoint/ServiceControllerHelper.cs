@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MetricHub.Entrypoint
 {
-    public static class ServiceMonitor
+    public static class ServiceControllerHelper
     {
         public static void StartService(string serviceName, TimeSpan timeout)
         {

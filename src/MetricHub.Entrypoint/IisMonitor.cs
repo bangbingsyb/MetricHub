@@ -25,15 +25,15 @@ namespace MetricHub.Entrypoint
                 { ServiceControllerStatus.PausePending },
             };
 
-            ServiceMonitor.StopService(serviceName, TimeSpan.FromSeconds(120));
+            ServiceControllerHelper.StopService(serviceName, TimeSpan.FromSeconds(120));
 
             // set console handler
 
-            ServiceMonitor.StartService(serviceName, TimeSpan.FromSeconds(120));
+            ServiceControllerHelper.StartService(serviceName, TimeSpan.FromSeconds(120));
 
-            ServiceMonitor.MonitorService(serviceName, statusList, _cts.Token);
+            ServiceControllerHelper.MonitorService(serviceName, statusList, _cts.Token);
 
-            ServiceMonitor.StopService(serviceName, TimeSpan.FromSeconds(120));
+            ServiceControllerHelper.StopService(serviceName, TimeSpan.FromSeconds(120));
         }
 
         private static void ControlSignalHandler(object sender, ConsoleCancelEventArgs args)

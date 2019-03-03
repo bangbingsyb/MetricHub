@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceProcess" />
@@ -47,7 +48,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IisMonitor.cs" />
-    <Compile Include="ServiceMonitor.cs" />
+    <Compile Include="IisConfigHelper.cs" />
+    <Compile Include="ServiceControllerHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

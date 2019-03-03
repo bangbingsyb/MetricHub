@@ -11,6 +11,7 @@ namespace MetricHub.Entrypoint
         static void Main(string[] args)
         {
             CollectMetrics();
+            IisConfigHelper.UpdateEnvironmentVariables();
             IisMonitor.Monitor();
         }
 
@@ -19,10 +20,10 @@ namespace MetricHub.Entrypoint
             IMetricLogger consoleLogger = new ConsoleMetricLogger();
             IMetricLogger fileLogger = new FileMetricLogger();
 
-            //IMetricProvider perfCounterProvider = new PerfCounterMetricProvider();
-            //perfCounterProvider.Subscribe(fileLogger);
-            //perfCounterProvider.Subscribe(consoleLogger);
-            //Task.Factory.StartNew(() => { perfCounterProvider.Start(); });
+            IMetricProvider perfCounterProvider = new PerfCounterMetricProvider();
+            perfCounterProvider.Subscribe(fileLogger);
+            perfCounterProvider.Subscribe(consoleLogger);
+            Task.Factory.StartNew(() => { perfCounterProvider.Start(); });
 
             IMetricProvider etwProvider = new EtwMetricProvider();
             etwProvider.Subscribe(consoleLogger);
