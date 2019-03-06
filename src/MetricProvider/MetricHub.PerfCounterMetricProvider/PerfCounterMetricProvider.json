@@ -1,6 +1,6 @@
 [
   {
-    "CategoryName": "Process",
+    "CategoryName": "Processor",
     "CounterName": "% Processor Time",
     "InstanceName": "_Total"
   },

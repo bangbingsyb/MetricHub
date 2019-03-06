@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MetricHub.Infrastructure
 {
     public abstract class MetricProviderBase : IMetricProvider
     {
+        public string Tag { get; set; }
+
         public event EventHandler<string> MetricPublisher;
 
         public abstract void Start();
@@ -17,7 +17,13 @@ namespace MetricHub.Infrastructure
 
         protected void OnPublishMetric(string data)
         {
-            MetricPublisher?.Invoke(this, data);
+            var record = new MetricRecord()
+            {
+                Tag = Tag,
+                Data = data
+            };
+
+            MetricPublisher?.Invoke(this, record.ToString());
         }
     }
 }

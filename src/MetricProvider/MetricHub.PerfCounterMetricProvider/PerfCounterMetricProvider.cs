@@ -5,26 +5,38 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace MetricHub.MetricProvider
 {
     public class PerfCounterMetricProvider : MetricProviderBase
     {
+        private const string tagName = "Windows.PerfCounter";
+
         private List<PerformanceCounter> _perfCounterList = new List<PerformanceCounter>();
+
+        public PerfCounterMetricProvider()
+        {
+            Tag = tagName;
+        }
 
         public override void Start()
         {
             Initialize();
 
+            foreach (var perfCounter in _perfCounterList)
+            {
+                Task.Factory.StartNew(() => { MonitorPerfCounter(perfCounter); });
+            }
+        }
+
+        private void MonitorPerfCounter(PerformanceCounter perfCounter)
+        {
             while (true)
             {
-                Thread.Sleep(1000);
-                foreach (var perfCounter in _perfCounterList)
-                {
-                    string data = $"{perfCounter.CategoryName}\\{perfCounter.CounterName}\\{perfCounter.InstanceName}: {perfCounter.NextValue().ToString()}";
-
-                    OnPublishMetric(data);
-                }
+                Thread.Sleep(2000);
+                string data = $"{perfCounter.CategoryName}\\{perfCounter.CounterName}\\{perfCounter.InstanceName}: {perfCounter.NextValue().ToString()}";
+                OnPublishMetric(data);
             }
         }
 
@@ -38,7 +50,7 @@ namespace MetricHub.MetricProvider
             foreach (var def in perfCounterDefinitions)
             {
                 Console.WriteLine($"Initializing performance counter: {def.CategoryName}\\{def.CounterName}\\{def.InstanceName}");
-                _perfCounterList.Add(new PerformanceCounter(def.CategoryName, def.CounterName, def.InstanceName));
+                _perfCounterList.Add(new PerformanceCounter(def.CategoryName, def.CounterName, def.InstanceName, true));
             }
         }
     }

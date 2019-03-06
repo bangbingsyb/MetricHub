@@ -10,9 +10,15 @@ namespace MetricHub.MetricProvider
 {
     public class EtwMetricProvider : MetricProviderBase
     {
-        private string _sessionName;
+        private const string tagName = "Windows.ETW";
 
+        private string _sessionName;
         private List<EtwProviderDefinition> _etwProviderList = new List<EtwProviderDefinition>();
+
+        public EtwMetricProvider()
+        {
+            Tag = tagName;
+        }
 
         public override void Start()
         {
