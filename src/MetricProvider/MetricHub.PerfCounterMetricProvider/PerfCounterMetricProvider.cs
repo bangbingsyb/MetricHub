@@ -32,6 +32,8 @@ namespace MetricHub.MetricProvider
 
         private void MonitorPerfCounter(PerformanceCounter perfCounter)
         {
+            perfCounter.NextValue();
+
             while (true)
             {
                 Thread.Sleep(2000);
