@@ -1,0 +1,21 @@
+# escape=`
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
+
+RUN powershell -Command `
+    Add-WindowsFeature Web-Server; `
+    Add-WindowsFeature NET-Framework-45-ASPNET; `
+    Add-WindowsFeature Web-Asp-Net45; `
+    Add-WindowsFeature Web-Http-Tracing;
+
+RUN powershell -Command `
+    Set-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST'  -filter "system.applicationHost/sites/siteDefaults/logFile" -name "logTargetW3C" -value "File,ETW"
+
+RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\*
+
+COPY Contents/ C:/inetpub/wwwroot
+
+COPY MetricHub/ C:/MetricHub
+
+EXPOSE 80
+
+ENTRYPOINT ["C:\\MetricHub\\MetricHub.Entrypoint.exe"]

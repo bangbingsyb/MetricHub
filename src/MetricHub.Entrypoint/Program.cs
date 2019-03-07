@@ -11,7 +11,7 @@ namespace MetricHub.Entrypoint
         static void Main(string[] args)
         {
             CollectMetrics();
-            //IisConfigHelper.UpdateEnvironmentVariables();
+            IisConfigHelper.UpdateEnvironmentVariables();
             IisMonitor.Monitor();
         }
 
