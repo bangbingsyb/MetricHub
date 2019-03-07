@@ -36,7 +36,7 @@ namespace MetricHub.MetricProvider
 
             while (true)
             {
-                Thread.Sleep(2000);
+                Thread.Sleep(TimeSpan.FromSeconds(10));
                 string data = $"{perfCounter.CategoryName}\\{perfCounter.CounterName}\\{perfCounter.InstanceName}: {perfCounter.NextValue().ToString()}";
                 OnPublishMetric(data);
             }
