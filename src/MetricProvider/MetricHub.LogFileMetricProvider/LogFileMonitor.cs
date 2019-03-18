@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace MetricHub.MetricProvider
 {
@@ -18,6 +15,8 @@ namespace MetricHub.MetricProvider
         private Dictionary<string, LogFileInfo> _fileStreamDict;
 
         public int MaxRetries { get; set; } = 5;
+
+        public bool IsStopped { get; set; } = false;
 
         public TimeSpan RetryInterval { get; set; } = TimeSpan.FromMilliseconds(1000);
 
@@ -52,6 +51,8 @@ namespace MetricHub.MetricProvider
             }
 
             _stopEvent.WaitOne();
+
+            IsStopped = true;
         }
 
         public void Stop()

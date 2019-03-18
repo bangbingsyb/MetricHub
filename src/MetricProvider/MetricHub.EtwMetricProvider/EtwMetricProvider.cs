@@ -60,6 +60,11 @@ namespace MetricHub.MetricProvider
             }
         }
 
+        public override void Stop()
+        {
+
+        }
+
         private void Initialize()
         {
             if (string.IsNullOrEmpty(_sessionName))

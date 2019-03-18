@@ -12,6 +12,8 @@ namespace MetricHub.Infrastructure
 
         void Start();
 
+        void Stop();
+
         void Subscribe(IMetricLogger logger);
     }
 }

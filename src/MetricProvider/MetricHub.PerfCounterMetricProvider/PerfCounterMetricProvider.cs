@@ -30,6 +30,11 @@ namespace MetricHub.MetricProvider
             }
         }
 
+        public override void Stop()
+        {
+
+        }
+
         private void MonitorPerfCounter(PerformanceCounter perfCounter)
         {
             perfCounter.NextValue();

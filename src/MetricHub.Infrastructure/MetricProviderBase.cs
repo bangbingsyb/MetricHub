@@ -10,6 +10,8 @@ namespace MetricHub.Infrastructure
 
         public abstract void Start();
 
+        public abstract void Stop();
+
         public void Subscribe(IMetricLogger logger)
         {
             MetricPublisher += logger.Log;
