@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricHub.EtwMetricProvider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricHub.PerfCounterMetricProvider", "src\MetricProvider\MetricHub.PerfCounterMetricProvider\MetricHub.PerfCounterMetricProvider.csproj", "{6F0960B4-E7CB-4251-9C69-9634299FA04A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricHub.LogFileMetricProvider", "src\MetricProvider\MetricHub.LogFileMetricProvider\MetricHub.LogFileMetricProvider.csproj", "{45EB8BC6-9196-4A0A-8D99-A42B41A69C44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{6F0960B4-E7CB-4251-9C69-9634299FA04A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F0960B4-E7CB-4251-9C69-9634299FA04A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F0960B4-E7CB-4251-9C69-9634299FA04A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45EB8BC6-9196-4A0A-8D99-A42B41A69C44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45EB8BC6-9196-4A0A-8D99-A42B41A69C44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45EB8BC6-9196-4A0A-8D99-A42B41A69C44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45EB8BC6-9196-4A0A-8D99-A42B41A69C44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{1BD60632-6604-4662-8331-882B55322AF1} = {DBD7324A-FBDA-477F-9E9F-9BAE01C27D2F}
 		{0CBB0DD2-1784-4770-8B0F-E4EBF089AB79} = {A18E5699-1B55-480A-A18E-62AA73462323}
 		{6F0960B4-E7CB-4251-9C69-9634299FA04A} = {A18E5699-1B55-480A-A18E-62AA73462323}
+		{45EB8BC6-9196-4A0A-8D99-A42B41A69C44} = {A18E5699-1B55-480A-A18E-62AA73462323}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80059396-532C-4E97-B580-B22FC031935B}

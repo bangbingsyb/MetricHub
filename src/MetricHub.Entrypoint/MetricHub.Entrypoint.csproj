@@ -71,6 +71,10 @@
       <Project>{0cbb0dd2-1784-4770-8b0f-e4ebf089ab79}</Project>
       <Name>MetricHub.EtwMetricProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MetricProvider\MetricHub.LogFileMetricProvider\MetricHub.LogFileMetricProvider.csproj">
+      <Project>{45eb8bc6-9196-4a0a-8d99-a42b41a69c44}</Project>
+      <Name>MetricHub.LogFileMetricProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MetricProvider\MetricHub.PerfCounterMetricProvider\MetricHub.PerfCounterMetricProvider.csproj">
       <Project>{6f0960b4-e7cb-4251-9c69-9634299fa04a}</Project>
       <Name>MetricHub.PerfCounterMetricProvider</Name>
